@@ -3,20 +3,23 @@
 	"id": "une-mod",
 	"version": "${version}",
 	"name": "UNE mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "UNE Mod",
 	"authors": [
-		"Me!"
+		"hugo-russeil"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/hugo-russeil/une-mod-1.20.1"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/une-mod/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"net.une.mod.UNEMod"
+		],
+		"client": [
+			"net.une.mod.UNEModClient"
 		],
 		"fabric-datagen": [
 			"net.une.mod.UNEModDataGenerator"
