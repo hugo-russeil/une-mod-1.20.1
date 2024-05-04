@@ -126,7 +126,7 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+        return this.getStack(OUTPUT_SLOT).isEmpty() || (this.getStack(OUTPUT_SLOT).getItem() == this.recipes.get(this.getStack(INPUT_SLOT).getItem()) && this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount());
     }
 
     @Override
