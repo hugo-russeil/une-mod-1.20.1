@@ -10,7 +10,7 @@ import net.minecraft.util.Identifier;
 import net.une.mod.UNEMod;
 
 public class CrushingScreen extends HandledScreen<CrushingScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(UNEMod.MOD_ID, "textures/gui/crushing.png");
+    private static final Identifier TEXTURE = new Identifier(UNEMod.MOD_ID, "textures/gui/crusher_gui.png");
     public CrushingScreen(CrushingScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
@@ -43,7 +43,7 @@ public class CrushingScreen extends HandledScreen<CrushingScreenHandler> {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderWithTooltip(context, mouseX, mouseY, delta);
+        renderBackground(context);
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
     }
