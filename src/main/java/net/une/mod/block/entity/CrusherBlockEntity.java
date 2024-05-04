@@ -64,16 +64,16 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
         if(world.isClient()) {
             return;
         }
-        if(isOutputSlotEmptyOrRecivable()) {
+
+        if(isOutputSlotEmptyOrReceivable()) {
             if(this.hasRecipe()) {
-                this.increaseProgress();
+                this.increaseCraftProgress();
                 markDirty(world, pos, state);
 
                 if(hasCraftingFinished()) {
                     this.craftItem();
                     this.resetProgress();
                 }
-
             } else {
                 this.resetProgress();
             }
@@ -99,7 +99,7 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
         return this.progress >= this.maxProgress;
     }
 
-    private void increaseProgress() {
+    private void increaseCraftProgress() {
         this.progress++;
     }
 
@@ -119,7 +119,7 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
         return this.getStack(OUTPUT_SLOT).getCount() + result.getCount() <= this.getStack(OUTPUT_SLOT).getMaxCount();
     }
 
-    private boolean isOutputSlotEmptyOrRecivable() {
+    private boolean isOutputSlotEmptyOrReceivable() {
         return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
     }
 
