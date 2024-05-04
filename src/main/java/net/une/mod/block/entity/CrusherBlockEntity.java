@@ -1,10 +1,8 @@
 package net.une.mod.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.kaupenjoe.tutorialmod.block.entity.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -24,7 +22,7 @@ import net.minecraft.world.World;
 import net.une.mod.screen.CrushingScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
-public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, net.kaupenjoe.tutorialmod.block.entity.ImplementedInventory {
+public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;

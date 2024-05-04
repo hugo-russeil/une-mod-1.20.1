@@ -1,4 +1,4 @@
-package net.kaupenjoe.tutorialmod.block.entity;
+package net.une.mod.block.entity;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;

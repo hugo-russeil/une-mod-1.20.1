@@ -3,6 +3,7 @@ package net.une.mod.block;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.une.mod.UNEMod;
 import net.une.mod.block.custom.CrusherBlock;
 import net.minecraft.block.*;
@@ -17,7 +18,8 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 public class ModBlocks {
 
     public static final Block CRUSHER = registerBlock("crusher",
-            new CrusherBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
+            new CrusherBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
+                    .requiresTool().strength(1.5F, 3.0F)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
