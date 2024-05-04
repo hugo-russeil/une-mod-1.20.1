@@ -1,6 +1,7 @@
 package net.une.mod.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.kaupenjoe.tutorialmod.block.entity.ImplementedInventory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -18,6 +19,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.une.mod.screen.CrushingScreenHandler;
 import org.jetbrains.annotations.Nullable;
@@ -121,6 +123,19 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
 
     private boolean isOutputSlotEmptyOrReceivable() {
         return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+    }
+
+    // Override of canExtract and canInsert methods so hoppers don't mess with the input/output slots
+    @Override
+    public boolean canExtract(int slot, ItemStack stack, Direction dir) {
+        // Prevent extraction from the input slot
+        return slot != INPUT_SLOT;
+    }
+
+    @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
+        // Prevent insertion into the output slot
+        return slot != OUTPUT_SLOT;
     }
 
     @Override
