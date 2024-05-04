@@ -67,9 +67,7 @@ public class CrusherBlock extends BlockWithEntity implements BlockEntityProvider
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if (world.isClient) {
-            return null;
-        }
-        return type == ModBlockEntities.CRUSHER ? (BlockEntityTicker<T>) CrusherBlockEntity::tick : null;
+        return validateTicker(type, ModBlockEntities.CRUSHER_BLOCK_ENTITY,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 }

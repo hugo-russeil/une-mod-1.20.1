@@ -34,7 +34,7 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
 
     public CrusherBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.CRUSHER, pos, state);
+        super(ModBlockEntities.CRUSHER_BLOCK_ENTITY, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {

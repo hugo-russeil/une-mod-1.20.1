@@ -9,7 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
 
 public class ModBlockEntities {
-    public static final BlockEntityType<CrusherBlockEntity> CRUSHER =
+    public static final BlockEntityType<CrusherBlockEntity> CRUSHER_BLOCK_ENTITY =
             Registry.register(Registries.BLOCK_ENTITY_TYPE,
             new Identifier(UNEMod.MOD_ID, "crusher_be"),
             FabricBlockEntityTypeBuilder.create(CrusherBlockEntity::new, ModBlocks.CRUSHER).build());
