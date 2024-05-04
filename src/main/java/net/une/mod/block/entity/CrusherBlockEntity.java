@@ -22,6 +22,9 @@ import net.minecraft.world.World;
 import net.une.mod.screen.CrushingScreenHandler;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
 
     private static final int INPUT_SLOT = 0;
@@ -32,6 +35,7 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
     private int maxProgress = 100;
 
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    private final Map<Item, Item> recipes = new HashMap<>();
 
     public CrusherBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.CRUSHER_BLOCK_ENTITY, pos, state);
@@ -58,6 +62,16 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
                 return 2;
             }
         };
+
+        loadRecipes();
+    }
+
+    private void loadRecipes() {
+        recipes.put(Items.RED_SANDSTONE, Items.RED_SAND);
+        recipes.put(Items.SANDSTONE, Items.SAND);
+        recipes.put(Items.GRAVEL, Items.SAND);
+        recipes.put(Items.COBBLESTONE, Items.GRAVEL);
+        recipes.put(Items.STONE, Items.COBBLESTONE);
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
@@ -83,16 +97,19 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
         }
     }
 
-
     private void resetProgress() {
         this.progress = 0;
     }
 
     private void craftItem() {
-        this.removeStack(INPUT_SLOT, 1);
-        ItemStack result = new ItemStack(Items.SAND, 1);
+        Item inputItem = this.getStack(INPUT_SLOT).getItem();
+        Item outputItem = this.recipes.get(inputItem);
+        if (outputItem != null) {
+            this.removeStack(INPUT_SLOT, 1);
+            ItemStack result = new ItemStack(outputItem, 1);
 
-        this.setStack(OUTPUT_SLOT, new ItemStack(result.getItem(), this.getStack(OUTPUT_SLOT).getCount() + result.getCount()));
+            this.setStack(OUTPUT_SLOT, new ItemStack(result.getItem(), this.getStack(OUTPUT_SLOT).getCount() + result.getCount()));
+        }
     }
 
     private boolean hasCraftingFinished() {
@@ -103,36 +120,22 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
         this.progress++;
     }
 
-    //hardcoded recipe for now, will be replaced with a recipe system later
     private boolean hasRecipe() {
-        ItemStack result = new ItemStack(Items.SAND, 1);
-        boolean hasInput = this.getStack(INPUT_SLOT).getItem() == Items.GRAVEL;
-
-        return hasInput && canInsertAmountIntoOutputSlot(result) && canInsertItemIntoOutputSlot(result.getItem());
-    }
-
-    private boolean canInsertItemIntoOutputSlot(Item item) {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getItem() == item;
-    }
-
-    private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
-        return this.getStack(OUTPUT_SLOT).getCount() + result.getCount() <= this.getStack(OUTPUT_SLOT).getMaxCount();
+        Item inputItem = this.getStack(INPUT_SLOT).getItem();
+        return this.recipes.containsKey(inputItem);
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
         return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
     }
 
-    // Override of canExtract and canInsert methods so hoppers don't mess with the input/output slots
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        // Prevent extraction from the input slot
         return slot != INPUT_SLOT;
     }
 
     @Override
     public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
-        // Prevent insertion into the output slot
         return slot != OUTPUT_SLOT;
     }
 
@@ -150,7 +153,6 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
     public Text getDisplayName() {
         return Text.literal("Crusher");
     }
-
 
     @Override
     protected void writeNbt(NbtCompound nbt) {
