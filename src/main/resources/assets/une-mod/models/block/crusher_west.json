@@ -6,6 +6,7 @@
     "north": "minecraft:block/furnace_side",
     "south": "minecraft:block/furnace_side",
     "west": "une-mod:block/crusher_front",
-    "east": "minecraft:block/furnace_side"
+    "east": "minecraft:block/furnace_side",
+    "particle": "minecraft:block/furnace_side"
   }
 }
