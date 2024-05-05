@@ -19,8 +19,8 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
 public class ModBlocks {
 
     public static final Block CRUSHER = registerBlock("crusher",
-            new CrusherBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
-                    .requiresTool().strength(1.5F, 3.0F)));
+            new CrusherBlock(FabricBlockSettings.copyOf(Blocks.STONE)
+                    .requiresTool().strength(3.5F, 3.5F)));
 
     private static void addItemsToFunctionnalItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.STONECUTTER, CRUSHER); // Crusher is added right after the Stonecutter, it sounds logical to me
