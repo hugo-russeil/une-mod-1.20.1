@@ -1,6 +1,11 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "une-mod:block/crusher"
+    "down": "minecraft:block/furnace_top",
+    "up": "minecraft:block/furnace_top",
+    "north": "une-mod:block/crusher_front",
+    "south": "minecraft:block/furnace_side",
+    "west": "minecraft:block/furnace_side",
+    "east": "minecraft:block/furnace_side"
   }
 }
