@@ -67,11 +67,65 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
 
     private void loadRecipes() {
+        // Prismarine shards
+        recipes.put(Items.PRISMARINE, Items.PRISMARINE_SHARD);
+
+        // Red sand
         recipes.put(Items.RED_SANDSTONE, Items.RED_SAND);
+        recipes.put(Items.CHISELED_RED_SANDSTONE, Items.RED_SAND);
+        recipes.put(Items.CUT_RED_SANDSTONE, Items.RED_SAND);
+        recipes.put(Items.SMOOTH_RED_SANDSTONE, Items.RED_SAND);
+
+        // Sand
         recipes.put(Items.SANDSTONE, Items.SAND);
+        recipes.put(Items.CHISELED_SANDSTONE, Items.SAND);
+        recipes.put(Items.CUT_SANDSTONE, Items.SAND);
+        recipes.put(Items.SMOOTH_SANDSTONE, Items.SAND);
+
         recipes.put(Items.GRAVEL, Items.SAND);
+
+        // Gravel
+        recipes.put(Items.GRANITE, Items.GRAVEL);
+        recipes.put(Items.POLISHED_GRANITE, Items.GRAVEL);
+
+        recipes.put(Items.DIORITE, Items.GRAVEL);
+        recipes.put(Items.POLISHED_DIORITE, Items.GRAVEL);
+
+        recipes.put(Items.ANDESITE, Items.GRAVEL);
+        recipes.put(Items.POLISHED_ANDESITE, Items.GRAVEL);
+
         recipes.put(Items.COBBLESTONE, Items.GRAVEL);
+        recipes.put(Items.MOSSY_COBBLESTONE, Items.GRAVEL);
+
+        recipes.put(Items.BASALT, Items.GRAVEL);
+        recipes.put(Items.SMOOTH_BASALT, Items.GRAVEL);
+        recipes.put(Items.POLISHED_BASALT, Items.GRAVEL);
+
+        recipes.put(Items.BLACKSTONE, Items.GRAVEL);
+        recipes.put(Items.POLISHED_BLACKSTONE, Items.GRAVEL);
+        recipes.put(Items.POLISHED_BLACKSTONE_BRICKS, Items.GRAVEL);
+        recipes.put(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, Items.GRAVEL);
+        recipes.put(Items.CHISELED_POLISHED_BLACKSTONE, Items.GRAVEL);
+
+        recipes.put(Items.COBBLED_DEEPSLATE, Items.GRAVEL);
+
+        // Cobblestone
         recipes.put(Items.STONE, Items.COBBLESTONE);
+        recipes.put(Items.SMOOTH_STONE, Items.COBBLESTONE);
+        recipes.put(Items.STONE_BRICKS, Items.COBBLESTONE);
+        recipes.put(Items.MOSSY_STONE_BRICKS, Items.COBBLESTONE);
+        recipes.put(Items.CRACKED_STONE_BRICKS, Items.COBBLESTONE);
+        recipes.put(Items.CHISELED_STONE_BRICKS, Items.COBBLESTONE);
+
+        // Cobbled Deepslate
+        recipes.put(Items.DEEPSLATE, Items.COBBLED_DEEPSLATE);
+        recipes.put(Items.POLISHED_DEEPSLATE, Items.COBBLED_DEEPSLATE);
+        recipes.put(Items.DEEPSLATE_BRICKS, Items.COBBLED_DEEPSLATE);
+        recipes.put(Items.CRACKED_DEEPSLATE_BRICKS, Items.COBBLED_DEEPSLATE);
+        recipes.put(Items.CHISELED_DEEPSLATE, Items.COBBLED_DEEPSLATE);
+        recipes.put(Items.DEEPSLATE_TILES, Items.COBBLED_DEEPSLATE);
+        recipes.put(Items.CRACKED_DEEPSLATE_TILES, Items.COBBLED_DEEPSLATE);
+
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
