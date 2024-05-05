@@ -2,6 +2,7 @@ package net.une.mod;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.une.mod.block.ModBlocks;
 import net.une.mod.block.entity.ModBlockEntities;
 import net.une.mod.screen.ModScreenHandlers;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ public class UNEMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
+		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerModBlockEntities();
 		ModScreenHandlers.registerModScreenHandlers();
 	}
