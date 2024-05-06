@@ -7,7 +7,7 @@ A custom Minecraft mod tailored for a specific server, introducing unique featur
 To install the mod, follow these steps:
 
 1. Download the mod from the [releases page](https://github.com/hugo-russeil/une-mod-1.20.1/releases/).
-2. Ensure you have Fabric API installed on your Minecraft client.
+2. Ensure you have Fabric installed on your Minecraft client.
 3. Move the downloaded mod file into the "mods" folder in your Minecraft directory.
 
 ## Features Added
