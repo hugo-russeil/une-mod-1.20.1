@@ -10,9 +10,13 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.une.mod.UNEMod;
 import net.une.mod.item.custom.SaltItem;
+import net.une.mod.item.custom.BrinePotionItem;
+import net.une.mod.item.custom.BrineSplashPotionItem;
 
 public class ModItems {
     public static final Item SALT = registerItem("salt", new SaltItem(new FabricItemSettings()));
+    public static final Item BRINE_POTION_ITEM = registerItem("brine_potion", new BrinePotionItem(new FabricItemSettings()));
+    public static final Item BRINE_SPLASH_POTION_ITEM = registerItem("brine_splash_potion", new BrineSplashPotionItem(new FabricItemSettings()));
 
     public static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(SALT);
