@@ -9,6 +9,7 @@ import net.minecraft.item.*;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.une.mod.UNEMod;
 import net.une.mod.block.custom.CrusherBlock;
+import net.une.mod.block.custom.FilterBlock;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.registry.Registries;
@@ -22,8 +23,13 @@ public class ModBlocks {
             new CrusherBlock(FabricBlockSettings.copyOf(Blocks.STONE)
                     .requiresTool().strength(3.5F, 3.5F)));
 
+    public static final Block FILTER = registerBlock("filter",
+            new FilterBlock(FabricBlockSettings.copyOf(Blocks.STONE)
+                    .requiresTool().strength(3.5F, 3.5F)));
+
     private static void addItemsToFunctionnalItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.STONECUTTER, CRUSHER); // Crusher is added right after the Stonecutter, it sounds logical to me
+        entries.addAfter(Items.STONECUTTER, FILTER);
     }
 
     private static Block registerBlock(String name, Block block) {

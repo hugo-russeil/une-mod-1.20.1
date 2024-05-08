@@ -12,6 +12,10 @@ public class ModScreenHandlers {
             Registry.register(Registries.SCREEN_HANDLER, new Identifier(UNEMod.MOD_ID, "crushing"),
                     new ExtendedScreenHandlerType<>(CrushingScreenHandler::new));
 
+    public static final ScreenHandlerType<FilterScreenHandler> FILTER_SCREEN_HANDLER =
+            Registry.register(Registries.SCREEN_HANDLER, new Identifier(UNEMod.MOD_ID, "filter"),
+                    new ExtendedScreenHandlerType<>(FilterScreenHandler::new));
+
     public static void registerModScreenHandlers() {
             UNEMod.LOGGER.info("Registering ModScreenHandlers for " + UNEMod.MOD_ID);
         }
