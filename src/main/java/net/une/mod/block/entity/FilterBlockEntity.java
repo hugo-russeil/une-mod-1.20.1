@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -56,33 +57,60 @@ public class FilterBlockEntity extends BlockEntity implements ExtendedScreenHand
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if(world.isClient()) {
-            return;
-        }
-
         tickCounter++;
-        if (tickCounter < 100) {
-            return;
-        }
 
-        tickCounter = 0;
+        // Check if the filter is touching water on top
+        BlockPos topPos = pos.up();
+        BlockState topState = world.getBlockState(topPos);
+        if (topState.isOf(Blocks.WATER)) {
 
-        // Check if the filter is touching water
-        for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.offset(direction);
-            BlockState neighborState = world.getBlockState(neighborPos);
-            if (neighborState.isOf(Blocks.WATER)) {
-                // Try to add salt to the inventory
-                for (int i = 0; i < 9; i++) {
-                    ItemStack stack = inventory.get(i);
-                    if (stack.isEmpty() || (stack.getItem() == ModItems.SALT && stack.getCount() < stack.getMaxCount())) {
-                        inventory.set(i, new ItemStack(ModItems.SALT, stack.getCount() + 1));
-                        markDirty(world, pos, state);
-                        break;
+            // Bubbles to indicate that the filter is set up correctly
+            double x = pos.getX() + 0.1f + world.random.nextFloat() * 0.9f;
+            double y = pos.getY() + 1.1;
+            double z = pos.getZ() + 0.1f + world.random.nextFloat() * 0.9f;
+            world.addParticle(ParticleTypes.BUBBLE, x, y, z, 0, 0.5, 0);
+
+            if(!world.isClient && !(tickCounter < 200)) {
+                // Reset the tick counter
+                tickCounter = 0;
+
+                // Generate a random number between 1 and 100
+                int randomNumber = world.getRandom().nextInt(100) + 1;
+
+                // Determine the item to add based on the random number
+                Item itemToAdd = null;
+                if (randomNumber <= 60) {
+                    // 60% chance to do nothing
+                    return;
+                } else if (randomNumber <= 85) {
+                    // 25% chance to add salt
+                    itemToAdd = ModItems.SALT;
+                } else if (randomNumber <= 95) {
+                    // 10% chance to add sand
+                    itemToAdd = Items.SAND;
+                } else {
+                    // 5% chance to add clay
+                    itemToAdd = Items.CLAY_BALL;
+                }
+
+                // Try to add the item to the inventory
+                if (itemToAdd != null) {
+                    for (int i = 0; i < 9; i++) {
+                        ItemStack stack = inventory.get(i);
+                        if (stack.isEmpty() || (stack.getItem() == itemToAdd && stack.getCount() < stack.getMaxCount())) {
+                            inventory.set(i, new ItemStack(itemToAdd, stack.getCount() + 1));
+                            markDirty(world, pos, state);
+                            break;
+                        }
                     }
                 }
-                break;
             }
+        } else {
+            // Smoke to indicate that the filter is not set up correctly
+            double x = pos.getX() + 0.1f + world.random.nextFloat() * 0.9f;
+            double y = pos.getY() + 1.0;
+            double z = pos.getZ() + 0.1f + world.random.nextFloat() * 0.9f;
+            world.addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0, 0);
         }
     }
     @Override
