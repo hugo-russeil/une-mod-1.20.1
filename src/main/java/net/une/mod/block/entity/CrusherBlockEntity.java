@@ -14,6 +14,8 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -164,6 +166,11 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
 
             this.setStack(OUTPUT_SLOT, new ItemStack(result.getItem(), this.getStack(OUTPUT_SLOT).getCount() + result.getCount()));
         }
+
+        assert world != null; // This line is used to avoid NullPointerException
+        if (!world.isClient()) {
+            world.playSound(null, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
     }
 
     private boolean hasCraftingFinished() {
@@ -180,7 +187,9 @@ public class CrusherBlockEntity extends BlockEntity implements ExtendedScreenHan
     }
 
     private boolean isOutputSlotEmptyOrReceivable() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || (this.getStack(OUTPUT_SLOT).getItem() == this.recipes.get(this.getStack(INPUT_SLOT).getItem()) && this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount());
+        return this.getStack(OUTPUT_SLOT).isEmpty() ||
+              (this.getStack(OUTPUT_SLOT).getItem() == this.recipes.get(this.getStack(INPUT_SLOT).getItem()) &&
+               this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount());
     }
 
     @Override

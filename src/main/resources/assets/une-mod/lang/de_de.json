@@ -1,3 +1,7 @@
 {
-  "block.une-mod.crusher": "Zerkleinerer"
+  "block.une-mod.crusher": "Zerkleinerer",
+  "block.une-mod.filter": "Filter",
+  "item.une-mod.salt": "Salz",
+  "item.une-mod.brine_splash_potion": "Sole",
+  "item.une-mod.brine_splash_potion.effect.empty": "Sole"
 }

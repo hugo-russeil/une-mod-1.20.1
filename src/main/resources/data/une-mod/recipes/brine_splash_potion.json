@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:potion",
+      "data": 0
+    },
+    {
+      "item": "une-mod:salt"
+    }
+  ],
+  "result": {
+    "item": "une-mod:brine_splash_potion",
+    "count": 1
+  }
+}

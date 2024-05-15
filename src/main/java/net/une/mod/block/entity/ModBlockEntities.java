@@ -14,6 +14,11 @@ public class ModBlockEntities {
             new Identifier(UNEMod.MOD_ID, "crusher_be"),
             FabricBlockEntityTypeBuilder.create(CrusherBlockEntity::new, ModBlocks.CRUSHER).build());
 
+    public static final BlockEntityType<FilterBlockEntity> FILTER_BLOCK_ENTITY =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE,
+            new Identifier(UNEMod.MOD_ID, "filter_be"),
+            FabricBlockEntityTypeBuilder.create(FilterBlockEntity::new, ModBlocks.FILTER).build());
+
     public static void registerModBlockEntities() {
         UNEMod.LOGGER.info("Registering ModBlockEntities for " + UNEMod.MOD_ID);
     }

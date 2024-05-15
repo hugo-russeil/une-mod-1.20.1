@@ -1,3 +1,7 @@
 {
-  "block.une-mod.crusher": "Vergruizer"
+  "block.une-mod.crusher": "Vergruizer",
+  "block.une-mod.filter": "Filter",
+  "item.une-mod.salt": "Zout",
+  "item.une-mod.brine_splash_potion": "Zoutwater",
+  "item.une-mod.brine_splash_potion.effect.empty": "Zoutwater"
 }

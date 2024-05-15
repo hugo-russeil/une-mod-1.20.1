@@ -1,3 +1,7 @@
 {
-  "block.une-mod.crusher": "Дробилка"
+  "block.une-mod.crusher": "Дробилка",
+  "block.une-mod.filter": "Фильтр",
+  "item.une-mod.salt": "Соль",
+  "item.une-mod.brine_splash_potion": "Рассол",
+  "item.une-mod.brine_splash_potion.effect.empty": "Рассол"
 }
