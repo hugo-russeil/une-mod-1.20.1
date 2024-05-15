@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
@@ -72,15 +73,22 @@ public class FilterBlock extends BlockWithEntity implements BlockEntityProvider 
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = ((FilterBlockEntity) world.getBlockEntity(pos));
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    if (!world.isClient) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof FilterBlockEntity) {
+            FilterBlockEntity filterBlockEntity = (FilterBlockEntity) blockEntity;
+            for (int i = 0; i < filterBlockEntity.size(); i++) {
+                ItemStack itemStack = filterBlockEntity.getStack(i);
+                if (!itemStack.isEmpty()) {
+                    player.giveItemStack(itemStack.copy());
+                    filterBlockEntity.setStack(i, ItemStack.EMPTY);
+                }
             }
         }
-        return ActionResult.SUCCESS;
     }
+    return ActionResult.SUCCESS;
+}
 
     @Nullable
     protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> validateTicker(BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker) {
