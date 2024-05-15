@@ -1,4 +1,7 @@
 {
   "block.une-mod.crusher": "Trituradora",
-  "item.une-mod.salt": "Sal"
+  "block.une-mod.filter": "Filtro",
+  "item.une-mod.salt": "Sal",
+  "item.une-mod.brine_splash_potion": "Salmuera",
+  "item.une-mod.brine_splash_potion.effect.empty": "Salmuera"
 }

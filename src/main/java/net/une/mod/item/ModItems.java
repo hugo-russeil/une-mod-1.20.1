@@ -20,6 +20,8 @@ public class ModItems {
 
     public static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(SALT);
+        //entries.add(BRINE_POTION_ITEM); Commented out because it's useless for now
+        entries.add(BRINE_SPLASH_POTION_ITEM);
     }
 
     private static Item registerItem(String name, Item item) {
