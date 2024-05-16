@@ -10,6 +10,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 
 public class SaltItem extends Item {
     public SaltItem(Settings settings) {
@@ -41,7 +42,12 @@ public class SaltItem extends Item {
                     world.getBlockState(pos).isOf(Blocks.PACKED_ICE) ||
                     world.getBlockState(pos).isOf(Blocks.BLUE_ICE)) {
                 world.playSound(null, pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.BLOCKS, 1.0f, 1.0f);
-                world.setBlockState(pos, Blocks.WATER.getDefaultState()); // Salt melts ice into water
+
+                if (!World.NETHER.equals(world.getRegistryKey())){ // Can't place water in the Nether
+                    world.setBlockState(pos, Blocks.WATER.getDefaultState()); // Salt melts ice into water
+                } else {
+                    world.breakBlock(pos, false); // Just break the ice block in the Nether
+                }
 
                 assert player != null; // This line is used to avoid NullPointerException
                 if (!player.isCreative()) {
