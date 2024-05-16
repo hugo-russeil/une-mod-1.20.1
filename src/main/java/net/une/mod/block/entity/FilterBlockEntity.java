@@ -17,6 +17,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.une.mod.item.ModItems;
 import org.jetbrains.annotations.Nullable;
@@ -109,6 +110,12 @@ public class FilterBlockEntity extends BlockEntity implements ExtendedScreenHand
             world.addParticle(ParticleTypes.SMOKE, x, y, z, 0, 0, 0);
         }
     }
+
+     @Override
+    public boolean canInsert(int slot, ItemStack stack, @Nullable Direction side) {
+        return false; // Prevent items from being inserted into the filter
+    }
+
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
         buf.writeBlockPos(this.pos);
