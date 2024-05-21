@@ -1,22 +1,30 @@
 package net.une.mod.item.custom;
 
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.scoreboard.Team;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.block.CauldronBlock;
 
 import java.util.List;
 import java.util.UUID;
 
-public class PassportItem extends Item {
+public class PassportItem extends Item implements DyeableItem {
     public PassportItem(Settings settings) {
         super(settings);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), this);
     }
 
     @Override
@@ -64,5 +72,33 @@ public class PassportItem extends Item {
         } else {
             return super.getName(stack);
         }
+    }
+
+    @Override
+    public int getColor(ItemStack stack) {
+        NbtCompound nbtCompound = stack.getNbt();
+        if (nbtCompound != null && nbtCompound.contains("color")) {
+            return nbtCompound.getInt("color");
+        }
+        return 16777215; // Default color (like leather armor)
+    }
+
+    @Override
+    public boolean hasColor(ItemStack stack) {
+        NbtCompound nbtCompound = stack.getNbt();
+        return nbtCompound != null && nbtCompound.contains("color");
+    }
+
+    @Override
+    public void removeColor(ItemStack stack) {
+        NbtCompound nbtCompound = stack.getNbt();
+        if (nbtCompound != null && nbtCompound.contains("color")) {
+            nbtCompound.remove("color");
+        }
+    }
+
+    @Override
+    public void setColor(ItemStack stack, int color) {
+        stack.getOrCreateNbt().putInt("color", color);
     }
 }
