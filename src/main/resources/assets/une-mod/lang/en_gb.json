@@ -3,5 +3,7 @@
   "block.une-mod.filter": "Filter",
   "item.une-mod.salt": "Salt",
   "item.une-mod.brine_splash_potion": "Brine",
-  "item.une-mod.brine_splash_potion.effect.empty": "Brine"
+  "item.une-mod.brine_splash_potion.effect.empty": "Brine",
+  "item.une-mod.passport": "Passport",
+  "item.une-mod.passport.named": "%s's Passport"
 }

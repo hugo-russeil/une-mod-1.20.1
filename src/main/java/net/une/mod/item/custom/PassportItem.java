@@ -53,25 +53,12 @@ public class PassportItem extends Item {
     }
 
     @Override
-    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-        if (world == null || !itemStack.hasNbt() || !itemStack.getNbt().contains("PlayerUUID")) {
-            return;
-        }
-
-        UUID playerUUID = itemStack.getNbt().getUuid("PlayerUUID");
-        PlayerEntity player = world.getPlayerByUuid(playerUUID);
-        if (player == null) {
-            return;
-        }
-
-        tooltip.add(Text.translatable("Player Name: " + player.getName().getString()));
-        tooltip.add(Text.translatable("Player UUID: " + player.getUuid().toString()));
-
-        Team team = (Team) player.getScoreboardTeam();
-        if (team != null) {
-            tooltip.add(Text.translatable("Player Team: " + team.getName()));
+    public Text getName(ItemStack stack) {
+        if (stack.hasNbt() && stack.getNbt().contains("PlayerName")) {
+            String playerName = stack.getNbt().getString("PlayerName");
+            return Text.translatable("item.une-mod.passport.named", playerName);
         } else {
-            tooltip.add(Text.translatable("Player Team: None"));
+            return super.getName(stack);
         }
     }
 }
