@@ -30,12 +30,25 @@ public class PassportItem extends Item {
     }
 
     @Override
-    public Text getName(ItemStack stack) {
-        if (stack.hasNbt() && stack.getNbt().contains("PlayerUUID")) {
-            UUID playerUUID = stack.getNbt().getUuid("PlayerUUID");
-            return Text.translatable("item.yourmod.passport.named", playerUUID);
-        } else {
-            return super.getName(stack);
+    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
+        if (itemStack.hasNbt()) {
+            if (itemStack.getNbt().contains("PlayerName")) {
+                String playerName = itemStack.getNbt().getString("PlayerName");
+                tooltip.add(Text.translatable("Name: " + playerName));
+            }
+            if (itemStack.getNbt().contains("PlayerUUID")) {
+                UUID playerUUID = itemStack.getNbt().getUuid("PlayerUUID");
+                tooltip.add(Text.translatable("UUID: " + playerUUID.toString()));
+                PlayerEntity player = world.getPlayerByUuid(playerUUID);
+                if (player != null) {
+                    Team team = (Team) player.getScoreboardTeam();
+                    if (team != null) {
+                        tooltip.add(Text.translatable("Nation: " + team.getName()));
+                    } else {
+                        tooltip.add(Text.translatable("Nation: Stateless"));
+                    }
+                }
+            }
         }
     }
 
@@ -60,6 +73,5 @@ public class PassportItem extends Item {
         } else {
             tooltip.add(Text.translatable("Player Team: None"));
         }
-        // Add more player information here
     }
 }
