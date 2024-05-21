@@ -23,8 +23,12 @@ public class PassportItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         if (!world.isClient && user.isSneaking()) {
-            itemStack.getOrCreateNbt().putUuid("PlayerUUID", user.getUuid());
-            return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+            // Check if the passport is already a player's
+            if (!itemStack.getOrCreateNbt().contains("PlayerUUID")) {
+                itemStack.getOrCreateNbt().putUuid("PlayerUUID", user.getUuid());
+                itemStack.getOrCreateNbt().putString("PlayerName", user.getName().getString());
+                return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
+            }
         }
         return new TypedActionResult<>(ActionResult.PASS, itemStack);
     }
