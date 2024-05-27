@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "item/book"
+    "layer0": "une-mod:item/passport"
   }
 }
