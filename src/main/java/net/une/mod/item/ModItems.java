@@ -13,12 +13,14 @@ import net.une.mod.item.custom.PassportItem;
 import net.une.mod.item.custom.SaltItem;
 import net.une.mod.item.custom.BrinePotionItem;
 import net.une.mod.item.custom.BrineSplashPotionItem;
+import net.une.mod.item.LocomotiveItem;
 
 public class ModItems {
     public static final Item SALT = registerItem("salt", new SaltItem(new FabricItemSettings()));
     public static final Item BRINE_POTION_ITEM = registerItem("brine_potion", new BrinePotionItem(new FabricItemSettings()));
     public static final Item BRINE_SPLASH_POTION_ITEM = registerItem("brine_splash_potion", new BrineSplashPotionItem(new FabricItemSettings()));
     public static final Item PASSPORT = registerItem("passport", new PassportItem(new FabricItemSettings()));
+    public static final Item LOCOMOTIVE_ITEM = registerItem("locomotive", new LocomotiveItem(new FabricItemSettings()));
 
     public static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(SALT);
