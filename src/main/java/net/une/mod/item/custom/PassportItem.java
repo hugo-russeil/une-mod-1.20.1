@@ -35,6 +35,14 @@ public class PassportItem extends Item implements DyeableItem {
             if (!itemStack.getOrCreateNbt().contains("PlayerUUID")) {
                 itemStack.getOrCreateNbt().putUuid("PlayerUUID", user.getUuid());
                 itemStack.getOrCreateNbt().putString("PlayerName", user.getName().getString());
+
+                Team team = (Team) user.getScoreboardTeam();
+                if (team != null) {
+                    itemStack.getOrCreateNbt().putString("TeamName", team.getName());
+                } else {
+                    itemStack.getOrCreateNbt().putString("TeamName", "Stateless");
+                }
+
                 return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
             }
         }
@@ -51,15 +59,11 @@ public class PassportItem extends Item implements DyeableItem {
             if (itemStack.getNbt().contains("PlayerUUID")) {
                 UUID playerUUID = itemStack.getNbt().getUuid("PlayerUUID");
                 tooltip.add(Text.translatable("UUID: " + playerUUID.toString()));
-                PlayerEntity player = world.getPlayerByUuid(playerUUID);
-                if (player != null) {
-                    Team team = (Team) player.getScoreboardTeam();
-                    if (team != null) {
-                        tooltip.add(Text.translatable("Nation: " + team.getName()));
-                    } else {
-                        tooltip.add(Text.translatable("Nation: Stateless"));
-                    }
-                }
+            }
+            // Get the team name from the NBT data
+            if (itemStack.getNbt().contains("TeamName")) {
+                String teamName = itemStack.getNbt().getString("TeamName");
+                tooltip.add(Text.translatable("Nation: " + teamName));
             }
         }
     }
