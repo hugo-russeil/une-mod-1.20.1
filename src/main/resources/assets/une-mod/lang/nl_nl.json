@@ -5,5 +5,6 @@
   "item.une-mod.brine_splash_potion": "Zoutwater",
   "item.une-mod.brine_splash_potion.effect.empty": "Zoutwater",
   "item.une-mod.passport": "Paspoort",
-  "item.une-mod.passport.named": "Paspoort van %s"
+  "item.une-mod.passport.named": "Paspoort van %s",
+  "item.une-mod.locomotive": "Locomotief"
 }
