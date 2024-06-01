@@ -5,5 +5,6 @@
   "item.une-mod.brine_splash_potion": "Рассол",
   "item.une-mod.brine_splash_potion.effect.empty": "Рассол",
   "item.une-mod.passport": "Паспорт",
-  "item.une-mod.passport.named": "Паспорт %s"
+  "item.une-mod.passport.named": "Паспорт %s",
+  "item.une-mod.locomotive": "Локомотив"
 }
