@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -24,6 +25,7 @@ import java.lang.reflect.Field;
 public class LocomotiveEntity extends FurnaceMinecartEntity {
     private static final double[] SPEEDS = {0, 0.5, 1, 2, 3, 4};
     private int speedIndex = 2; // start at regular speed
+    private int fuel = 0;
 
     public LocomotiveEntity(EntityType<? extends FurnaceMinecartEntity> entityType, World world) {
         super(entityType, world);
@@ -76,26 +78,47 @@ public class LocomotiveEntity extends FurnaceMinecartEntity {
 
         // If the player is not pressing the forward or backward key, do the normal interaction
         else {
-            return super.interact(player, hand);
+            if ((item == Items.COAL || item == Items.CHARCOAL) && this.fuel + 3600 <= 32000) {
+                if (!player.getAbilities().creativeMode) {
+                    itemStack.decrement(1);
+                }
+
+                this.fuel += 3600;
+            }
+
+            if (this.fuel > 0) {
+                this.pushX = this.getX() - player.getX();
+                this.pushZ = this.getZ() - player.getZ();
+            }
+
+            return ActionResult.success(this.getWorld().isClient);
         }
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (!this.getWorld().isClient && this.isAlive()) {
-            try {
-                Field fuelField = FurnaceMinecartEntity.class.getDeclaredField("fuel");
-                fuelField.setAccessible(true);
-                int fuel = (int) fuelField.get(this);
-                if (fuel > 0) {
-                    double consumptionMultiplier = SPEEDS[speedIndex];
-                    fuel -= consumptionMultiplier;
-                    fuelField.set(this, Math.max(fuel, 0));
-                }
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
+        if (!this.getWorld().isClient()) {
+            if (this.fuel > 0) {
+                double consumptionMultiplier = SPEEDS[speedIndex];
+                this.fuel -= consumptionMultiplier;
+                this.fuel = Math.max(this.fuel, 0);
             }
+
+            if (this.fuel <= 0) {
+                this.pushX = 0.0;
+                this.pushZ = 0.0;
+            }else {
+                Vec3d direction = this.getVelocity().normalize();
+                this.pushX = direction.x;
+                this.pushZ = direction.z;
+            }
+
+            this.setLit(this.fuel > 0);
+        }
+
+        if (this.isLit() && this.random.nextInt(4) == 0) {
+            this.getWorld().addParticle(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 0.8, this.getZ(), 0.0, 0.0, 0.0);
         }
     }
 }
