@@ -6,5 +6,8 @@
   "item.une-mod.brine_splash_potion.effect.empty": "Рассол",
   "item.une-mod.passport": "Паспорт",
   "item.une-mod.passport.named": "Паспорт %s",
-  "item.une-mod.locomotive": "Локомотив"
+  "item.une-mod.locomotive": "Локомотив",
+  "block.une-mod.gold_trophy": "Золотой трофей",
+  "block.une-mod.silver_trophy": "Серебряный трофей",
+  "block.une-mod.bronze_trophy": "Бронзовый трофей"
 }

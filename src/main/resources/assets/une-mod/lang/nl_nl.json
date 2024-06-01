@@ -6,5 +6,8 @@
   "item.une-mod.brine_splash_potion.effect.empty": "Zoutwater",
   "item.une-mod.passport": "Paspoort",
   "item.une-mod.passport.named": "Paspoort van %s",
-  "item.une-mod.locomotive": "Locomotief"
+  "item.une-mod.locomotive": "Locomotief",
+  "block.une-mod.gold_trophy": "Gouden Trofee",
+  "block.une-mod.silver_trophy": "Zilveren Trofee",
+  "block.une-mod.bronze_trophy": "Bronzen Trofee"
 }

@@ -6,5 +6,8 @@
   "item.une-mod.brine_splash_potion.effect.empty": "Salmuera",
   "item.une-mod.passport": "Pasaporte",
   "item.une-mod.passport.named": "Pasaporte de %s",
-  "item.une-mod.locomotive": "Locomotora"
+  "item.une-mod.locomotive": "Locomotora",
+  "block.une-mod.gold_trophy": "Trofeo de Oro",
+  "block.une-mod.silver_trophy": "Trofeo de Plata",
+  "block.une-mod.bronze_trophy": "Trofeo de Bronce"
 }

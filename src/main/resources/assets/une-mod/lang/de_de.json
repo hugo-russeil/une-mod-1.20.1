@@ -6,5 +6,8 @@
   "item.une-mod.brine_splash_potion.effect.empty": "Sole",
   "item.une-mod.passport": "Reisepass",
   "item.une-mod.passport.named": "Reisepass von %s",
-  "item.une-mod.locomotive": "Lokomotive"
+  "item.une-mod.locomotive": "Lokomotive",
+  "block.une-mod.gold_trophy": "Goldener Pokal",
+  "block.une-mod.silver_trophy": "Silberner Pokal",
+  "block.une-mod.bronze_trophy": "Bronzener Pokal"
 }
