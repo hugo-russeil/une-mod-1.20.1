@@ -3,6 +3,7 @@ package net.une.mod.item;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.MinecartItem;
 import net.minecraft.registry.tag.BlockTags;
@@ -34,5 +35,10 @@ public class LocomotiveItem extends MinecartItem {
             context.getStack().decrement(1);
             return ActionResult.SUCCESS;
         }
+    }
+
+    @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true; // Make the item glint like enchanted items
     }
 }
