@@ -23,9 +23,10 @@ import java.util.UUID;
 
 public class PassportItem extends Item implements DyeableItem {
     public PassportItem(Settings settings) {
-        super(settings);
+        super(new Item.Settings().maxCount(1));
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> ((DyeableItem)stack.getItem()).getColor(stack), this);
     }
+
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
