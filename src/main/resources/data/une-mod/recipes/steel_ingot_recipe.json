@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "une-mod:pig_iron"
+  },
+  "result": "une-mod:steel_ingot",
+  "experience": 0.7,
+  "cookingtime": 100
+}

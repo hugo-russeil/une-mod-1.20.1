@@ -3,14 +3,14 @@
   "pattern": [
     "CCC",
     "CPC",
-    "CRC"
+    "CEC"
   ],
   "key": {
     "C": {
       "item": "minecraft:cobblestone"
     },
-    "R": {
-      "item": "minecraft:redstone"
+    "E": {
+      "item": "une-mod:electronic_parts"
     },
     "P": {
       "item": "minecraft:piston"

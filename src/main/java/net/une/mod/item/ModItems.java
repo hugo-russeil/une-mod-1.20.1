@@ -23,16 +23,23 @@ public class ModItems {
     public static final Item BRINE_SPLASH_POTION_ITEM = registerItem("brine_splash_potion", new BrineSplashPotionItem(new FabricItemSettings()));
     public static final Item PASSPORT = registerItem("passport", new PassportItem(new FabricItemSettings()));
     public static final Item LOCOMOTIVE_ITEM = registerItem("locomotive", new LocomotiveItem(new FabricItemSettings()));
+    public static final Item IRON_AND_COAL = registerItem("iron_and_coal", new Item(new FabricItemSettings()));
+    public static final Item PIG_IRON = registerItem("pig_iron", new Item(new FabricItemSettings()));
+    public static final Item STEEL_INGOT = registerItem("steel_ingot", new Item(new FabricItemSettings()));
 
     public static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(SALT);
         //entries.add(BRINE_POTION_ITEM); Commented out because it's useless for now
         entries.add(BRINE_SPLASH_POTION_ITEM);
+        entries.addAfter(Items.RAW_IRON, PIG_IRON);
+        entries.addAfter(Items.IRON_INGOT, IRON_AND_COAL);
+        entries.addAfter(Items.IRON_INGOT, STEEL_INGOT);
     }
 
     public static void addItemsToToolsItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.FURNACE_MINECART, LOCOMOTIVE_ITEM);
         entries.addAfter(Items.WRITABLE_BOOK, PASSPORT);
+        entries.addAfter(Items.REDSTONE, ELECTRONIC_PARTS);
     }
 
     public static void addItemsToRedstoneItemGroup(FabricItemGroupEntries entries) {
