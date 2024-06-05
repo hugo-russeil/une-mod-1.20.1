@@ -23,6 +23,7 @@ public class ModItems {
     public static final Item BRINE_SPLASH_POTION_ITEM = registerItem("brine_splash_potion", new BrineSplashPotionItem(new FabricItemSettings()));
     public static final Item PASSPORT = registerItem("passport", new PassportItem(new FabricItemSettings()));
     public static final Item LOCOMOTIVE_ITEM = registerItem("locomotive", new LocomotiveItem(new FabricItemSettings()));
+    public static final Item ELECTRONIC_PARTS = registerItem("electronic_parts", new Item(new FabricItemSettings()));
     public static final Item IRON_AND_COAL = registerItem("iron_and_coal", new Item(new FabricItemSettings()));
     public static final Item PIG_IRON = registerItem("pig_iron", new Item(new FabricItemSettings()));
     public static final Item STEEL_INGOT = registerItem("steel_ingot", new Item(new FabricItemSettings()));
