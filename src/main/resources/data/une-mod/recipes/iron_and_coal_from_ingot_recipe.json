@@ -1,17 +1,14 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "IC",
-    "C"
-  ],
-  "key": {
-    "C": {
-      "item": "minecraft:charcoal"
-    },
-    "I": {
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
       "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:charcoal",
+      "count": 2
     }
-  },
+  ],
   "result": {
     "item": "une-mod:iron_and_coal",
     "count": 1
