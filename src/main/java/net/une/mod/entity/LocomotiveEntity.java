@@ -21,6 +21,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.une.mod.item.ModItems;
 import net.une.mod.network.LocomotiveSpeedPacket;
 
 import java.awt.*;
@@ -134,5 +135,10 @@ public class LocomotiveEntity extends FurnaceMinecartEntity {
 
     public void setSpeedIndex(int speedIndex) {
         this.speedIndex = speedIndex;
+    }
+
+    @Override
+    protected Item getItem() {
+        return ModItems.LOCOMOTIVE_ITEM;
     }
 }
