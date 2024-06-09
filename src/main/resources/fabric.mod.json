@@ -8,8 +8,9 @@
 		"hugo-russeil"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/hugo-russeil/une-mod-1.20.1"
+		"homepage": "https://github.com/hugo-russeil/une-mod-1.20.1",
+		"sources": "https://github.com/hugo-russeil/une-mod-1.20.1",
+		"issues": "https://github.com/hugo-russeil/une-mod-1.20.1/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/une-mod/icon.png",

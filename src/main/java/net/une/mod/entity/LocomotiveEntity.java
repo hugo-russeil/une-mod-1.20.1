@@ -1,5 +1,7 @@
 package net.une.mod.entity;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.EntityType;
@@ -9,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -18,6 +21,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.une.mod.network.LocomotiveSpeedPacket;
 
 import java.awt.*;
 import java.lang.reflect.Field;
@@ -41,39 +45,44 @@ public class LocomotiveEntity extends FurnaceMinecartEntity {
         ItemStack itemStack = player.getStackInHand(hand);
         Item item = itemStack.getItem();
 
-        // Get the key bindings for moving forward and backward
-        KeyBinding forwardKey = MinecraftClient.getInstance().options.forwardKey;
-        KeyBinding backwardKey = MinecraftClient.getInstance().options.backKey;
+        if (player.getWorld().isClient()) {
+            // Get the key bindings for moving forward and backward
+            KeyBinding forwardKey = MinecraftClient.getInstance().options.forwardKey;
+            KeyBinding backwardKey = MinecraftClient.getInstance().options.backKey;
 
 
-        // Check if the player is right-clicking while pressing the forward key
-        if (forwardKey.isPressed() && hand == Hand.MAIN_HAND) {
-            // Increase the speed index, but don't go past the end of the array
-            if (speedIndex < SPEEDS.length - 1) {
-                speedIndex++;
-                if(player.getWorld().isClient()) {
+            // Check if the player is right-clicking while pressing the forward key
+            if (forwardKey.isPressed() && hand == Hand.MAIN_HAND) {
+                if (speedIndex < SPEEDS.length - 1) {
+                    speedIndex++;
+                    LocomotiveSpeedPacket packet = new LocomotiveSpeedPacket(speedIndex, this.getUuid());
+                    PacketByteBuf buf = PacketByteBufs.create();
+                    packet.write(buf);
+                    ClientPlayNetworking.send(LocomotiveSpeedPacket.ID, buf);
                     String speed = String.format("%.0f", 12 * SPEEDS[speedIndex]);
                     Text message = Text.translatable("Speed was set to " + speed + " km/h");
-                    player.sendMessage(message);
+                    player.sendMessage(message, false);
                 }
+
+                return ActionResult.SUCCESS;
             }
 
-            return ActionResult.SUCCESS;
-        }
-
-        // Check if the player is right-clicking while pressing the backward key
-        else if (backwardKey.isPressed() && hand == Hand.MAIN_HAND) {
-            // Decrease the speed index, but don't go below 0
-            if (speedIndex > 0) {
-                speedIndex--;
-                if(player.getWorld().isClient()) {
+            // Check if the player is right-clicking while pressing the backward key
+            else if (backwardKey.isPressed() && hand == Hand.MAIN_HAND) {
+                // Decrease the speed index, but don't go below 0
+                if (speedIndex > 0) {
+                    speedIndex--;
+                    LocomotiveSpeedPacket packet = new LocomotiveSpeedPacket(speedIndex, this.getUuid());
+                    PacketByteBuf buf = PacketByteBufs.create();
+                    packet.write(buf);
+                    ClientPlayNetworking.send(LocomotiveSpeedPacket.ID, buf);
                     String speed = String.format("%.0f", 12 * SPEEDS[speedIndex]);
                     Text message = Text.translatable("Speed was set to " + speed + " km/h");
-                    player.sendMessage(message);
+                    player.sendMessage(message, false);
                 }
-            }
 
-            return ActionResult.SUCCESS;
+                return ActionResult.SUCCESS;
+            }
         }
 
         // If the player is not pressing the forward or backward key, do the normal interaction
@@ -93,6 +102,7 @@ public class LocomotiveEntity extends FurnaceMinecartEntity {
 
             return ActionResult.success(this.getWorld().isClient);
         }
+        return ActionResult.PASS;
     }
 
     @Override
@@ -120,5 +130,9 @@ public class LocomotiveEntity extends FurnaceMinecartEntity {
         if (this.isLit() && this.random.nextInt(4) == 0) {
             this.getWorld().addParticle(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 0.8, this.getZ(), 0.0, 0.0, 0.0);
         }
+    }
+
+    public void setSpeedIndex(int speedIndex) {
+        this.speedIndex = speedIndex;
     }
 }
