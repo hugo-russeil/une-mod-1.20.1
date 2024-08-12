@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "une-mod:block/steel_block",
+    "up": "une-mod:block/steel_block",
+    "north": "une-mod:block/steel_block",
+    "south": "une-mod:block/steel_block",
+    "west": "une-mod:block/steel_block",
+    "east": "une-mod:block/steel_block",
+    "particle": "une-mod:block/steel_block"
+  }
+}
