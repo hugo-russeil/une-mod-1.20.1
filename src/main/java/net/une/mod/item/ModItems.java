@@ -47,6 +47,10 @@ public class ModItems {
         entries.addAfter(Items.FURNACE_MINECART, LOCOMOTIVE_ITEM);
     }
 
+    public static void addItemsToFunctionnalItemGroup(FabricItemGroupEntries entries) {
+        entries.add(BALL);
+    }
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(UNEMod.MOD_ID, name), item);
     }
