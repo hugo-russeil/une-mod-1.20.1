@@ -22,6 +22,12 @@
 		"client": [
 			"net.une.mod.UNEModClient"
 		],
+		"fabric": [
+			"net.une.mod.UNEMod"
+		],
+		"fabric-client": [
+			"net.une.mod.UNEModClient"
+		],
 		"fabric-datagen": [
 			"net.une.mod.UNEModDataGenerator"
 		]

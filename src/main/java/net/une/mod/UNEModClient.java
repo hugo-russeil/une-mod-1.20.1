@@ -6,8 +6,11 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.entity.MinecartEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.une.mod.entity.ModEntities;
+import net.une.mod.item.ModItems;
 import net.une.mod.screen.CrushingScreen;
 import net.une.mod.screen.ModScreenHandlers;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
+
 
 public class UNEModClient implements ClientModInitializer {
     @Override
@@ -17,5 +20,9 @@ public class UNEModClient implements ClientModInitializer {
         EntityRendererRegistry.INSTANCE.register(ModEntities.LOCOMOTIVE_ENTITY,
                 (context) -> new MinecartEntityRenderer<>(context, EntityModelLayers.MINECART));
 
+        EntityRendererRegistry.INSTANCE.register(
+                ModEntities.BALL_ENTITY,
+                FlyingItemEntityRenderer::new // single‐arg ctor uses default scale/lit
+        );
     }
 }

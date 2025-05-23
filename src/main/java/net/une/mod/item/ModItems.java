@@ -11,10 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.une.mod.UNEMod;
-import net.une.mod.item.custom.PassportItem;
-import net.une.mod.item.custom.SaltItem;
-import net.une.mod.item.custom.BrinePotionItem;
-import net.une.mod.item.custom.BrineSplashPotionItem;
+import net.une.mod.item.custom.*;
 import net.une.mod.item.LocomotiveItem;
 
 public class ModItems {
@@ -27,6 +24,9 @@ public class ModItems {
     public static final Item IRON_AND_COAL = registerItem("iron_and_coal", new Item(new FabricItemSettings()));
     public static final Item PIG_IRON = registerItem("pig_iron", new Item(new FabricItemSettings()));
     public static final Item STEEL_INGOT = registerItem("steel_ingot", new Item(new FabricItemSettings()));
+    public static final Item BALL = registerItem("ball", new BallItem(new FabricItemSettings()));
+
+
 
     public static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries) {
         entries.add(SALT);

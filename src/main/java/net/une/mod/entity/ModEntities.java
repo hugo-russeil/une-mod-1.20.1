@@ -1,9 +1,11 @@
 package net.une.mod.entity;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 import net.une.mod.UNEMod;
 import net.une.mod.entity.BrineSplashPotionEntity;
 import net.une.mod.entity.LocomotiveEntity;
@@ -17,7 +19,18 @@ public class ModEntities {
             "locomotive_entity",
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, LocomotiveEntity::new).dimensions(EntityDimensions.fixed(0.98f, 0.7f)).build());
 
+    public static final EntityType<BallEntity> BALL_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(UNEMod.MOD_ID, "ball"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, BallEntity::new).dimensions(EntityDimensions.fixed(0.6f, 0.6f)).build()
+    );
+
+
     public static void registerModEntities() {
         UNEMod.LOGGER.info("Registering ModEntities for " + UNEMod.MOD_ID);
+        FabricDefaultAttributeRegistry.register(
+                BALL_ENTITY,
+                BallEntity.createMobAttributes()
+        );
     }
 }
