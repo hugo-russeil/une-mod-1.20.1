@@ -35,9 +35,9 @@ public class ModBlocks {
             new TrophyBlock(FabricBlockSettings.copyOf(Blocks.COPPER_BLOCK)
                     .requiresTool().strength(3.5F, 3.5F).nonOpaque()));
 
-    public static final Block STEEL_BLOCK = registerBlock("steel_block",
-            new SteelBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
-                    .requiresTool().strength(3.5F, 3.5F)));
+//    public static final Block STEEL_BLOCK = registerBlock("steel_block",
+//            new SteelBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)
+//                    .requiresTool().strength(3.5F, 3.5F)));
 
     public static void addItemsToFunctionnalItemGroup(FabricItemGroupEntries entries) {
         entries.addAfter(Items.STONECUTTER, CRUSHER); // Crusher is added right after the Stonecutter, it sounds logical to me
@@ -51,7 +51,7 @@ public class ModBlocks {
     }
 
     public static void addItemsToBuildingBlocksItemGroup(FabricItemGroupEntries entries) {
-        entries.addAfter(Items.IRON_BLOCK, STEEL_BLOCK);
+//        entries.addAfter(Items.IRON_BLOCK, STEEL_BLOCK);
     }
 
     private static Block registerBlock(String name, Block block) {
