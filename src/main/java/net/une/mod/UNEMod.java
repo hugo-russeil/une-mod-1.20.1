@@ -6,6 +6,7 @@ import net.une.mod.block.ModBlocks;
 import net.une.mod.block.entity.ModBlockEntities;
 import net.une.mod.entity.ModEntities;
 import net.une.mod.item.ModItems;
+import net.une.mod.network.ModPacketHandler;
 import net.une.mod.screen.ModScreenHandlers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,5 +23,6 @@ public class UNEMod implements ModInitializer {
 		ModBlockEntities.registerModBlockEntities();
 		ModEntities.registerModEntities();
 		ModScreenHandlers.registerModScreenHandlers();
+		ModPacketHandler.register();
 	}
 }
